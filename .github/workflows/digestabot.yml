@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false
 
       - name: Update image digests with digestabot
-        uses: wistia/digestabot@53c91557869244d22f376951b6e0bc0c1e81f8a9
+        uses: chainguard-dev/digestabot@869cc5997df3c09084eabc9f7519091924a4b5ea
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           labels-for-pr: automated pr, security, digestabot

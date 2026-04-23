@@ -1,0 +1,33 @@
+name: Digestabot - Update docker image versions
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 6 * * *'
+
+jobs:
+  image-update:
+    name: Update docker image digests
+    runs-on: ubuntu-24.04
+
+    permissions:
+      actions: write # updating workflows
+      contents: write # to push the updates
+      pull-requests: write # to open Pull requests
+      id-token: write # used to sign the commits using gitsign
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+
+      - name: Update image digests with digestabot
+        uses: wistia/digestabot@53c91557869244d22f376951b6e0bc0c1e81f8a9
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          labels-for-pr: automated pr, security, digestabot
+          branch-for-pr: digestabot-update-digests
+          title-for-pr: '[digestabot] Update Docker images'
+          description-for-pr: 'This PR updates docker images whose tags now reference updated images in their respective repositories.'
+          commit-message: '[digestabot] Update docker images'

@@ -1,5 +1,5 @@
-FROM alpine:3.23
+FROM alpine:3.23@sha256:51183f2cfa6320055da30872f211093f9ff1d3cf06f39a0bdb212314c5dc7375
 
-FROM nginx:1.30
+FROM nginx:1.28@sha256:88d42e21931edb8a4fae4c419b00e93cb69eb91eb860faffe91ea6915cf0a3cb
 
 
